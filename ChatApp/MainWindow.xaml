@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ChatApp"
+        xmlns:local="clr-namespace:ChatApp" xmlns:customcontrols="clr-namespace:ChatApp.CustomControls"
         mc:Ignorable="d"
         x:Name="mainWindow"
         AllowsTransparency="True"
@@ -25,11 +25,139 @@
                 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <!--Contacts Area-->
                 <ColumnDefinition Width="auto"/>
+                <!--Conversation Area-->
                 <ColumnDefinition />
+                <!-- Profile Info-->
                 <ColumnDefinition Width="auto"/>
-               
             </Grid.ColumnDefinitions>
+            
+            <!--Title Bar-->
+            <Border 
+                Background="#49a078"
+                CornerRadius="20,20,0,0"
+                Grid.ColumnSpan="3"
+                MouseDown="Border_MouseDown">
+            <Grid>
+                <TextBlock Text="{Binding Title,
+                    ElementName=mainWindow}"
+                           HorizontalAlignment="Left"
+                           Margin="15,0"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           FontSize="22"
+                           FontWeight="DemiBold"/>
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        Margin="10,0"
+                        Orientation="Horizontal">
+                        <Button x:Name="btnMinimize"
+                                Content="{StaticResource minimize}"
+                                Click="btnMinimize_Click"
+                                Style="{StaticResource IconButtonStyle}" />
+                        <Button x:Name="btnMaximize"
+                                Content="{StaticResource maximize}"
+                                Click="btnMaximize_Click"
+                                Style="{StaticResource IconButtonStyle}" />
+                        <Button x:Name="btnClose"
+                                Content="{StaticResource close}"
+                                Click="btnClose_Click"
+                                Foreground="Red"
+                                Style="{StaticResource IconButtonStyle}" />
+                        
+        
+        
+
+                    </StackPanel>
+            </Grid>
+            </Border>
+            <!-- Contacs Chat List -->
+            <Grid Grid.Row="1" MinWidth="406">
+                <Grid.RowDefinitions>
+                    
+                    <!-- Title & Search etc ...-->
+                    <RowDefinition Height="Auto"/>
+                    
+                    <!--Status Thumbs -->
+                    <RowDefinition Height="Auto"/>
+                    
+                    <!--Chat List -->
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+                <!--Title & Search etc ...-->
+                <Grid
+                    Height="75"
+                    Margin="15,0">
+                    <Grid.ColumnDefinitions>
+                        <!--Title-->
+                        <ColumnDefinition Width="Auto"/>
+                        <!--Blank -->
+                        <ColumnDefinition/>
+                        
+                        <!--Search Button-->
+                        <ColumnDefinition Width="Auto"/>
+                        <!--More Option Button-->
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Text="Chats"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        />
+                    <!--Search Btn-->
+                    <Button
+                        Grid.Column="2"
+                        x:Name="btnChatSearchButton"
+                        Content="{StaticResource search}"
+                        Style="{StaticResource IconButtonStyle}"
+                        />
+                    <!--More Option Button-->
+                    <ToggleButton x:Name="btnMoreOptions"
+                                  Grid.Column="3"
+                                  Content="{StaticResource more}"
+                                  Style="{StaticResource ToggleIconButtonStyle}"/>
+                </Grid>
+               
+                
+                <!--#region SearchBox-->
+                <!--Todo : Add searchbox open/close and hide/unhide triggers-->
+                <Border 
+                    Background="#dce2de"
+                    CornerRadius="15"
+                    Grid.Row="1"
+                    Margin="20"
+                    Height="50"
+                    x:Name="searchBoxBorder"
+                    FocusManager.FocusedElement="{Binding ElementName=searchQuery}">
+                    
+                    <TextBox
+                        Background="Transparent"
+                        BorderThickness="0"
+                       x:Name="searchQuery" 
+                        Padding="12,0"
+                        Text="Search Text"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        />
+                </Border>
+                    
+                <!--#endregion-->
+                
+                
+                
+                <!--#region Status Thumbs-->
+
+                <customcontrols:StatusThumbs Grid.Row="2"/>
+
+                <!--#endregion-->
+                
+                
+            </Grid>
+            
         </Grid>
     </Border>
 </Window>
