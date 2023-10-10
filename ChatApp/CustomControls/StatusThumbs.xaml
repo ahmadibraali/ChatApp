@@ -17,7 +17,7 @@
         -->
         <DataTemplate x:Key="thumbsTemplate" >
             <!--Ellipse-->
-            <Grid Margin="0,0,8,0">
+            <Grid Margin="0,0,8,8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80" />
                     <RowDefinition/>
